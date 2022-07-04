@@ -19,6 +19,8 @@ export let options = {
 };
 
 const BASE_URL = 'https://jaesungahn91.kro.kr';
+const USERNAME = 'sung431@naver.com';
+const PASSWORD = '1234';
 
 export default function ()  {
     // 메인 페이지
