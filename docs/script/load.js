@@ -33,10 +33,18 @@ export default function ()  {
     // 지하철역 목록 조회
     findStations();
 
+    // 랜덤한 출발지/목적지 선택(2호선)
+    let stationIds = [ 128, 127, 143, 144, 126, 125, 124, 123, 122, 96,
+        138, 137, 136, 135, 134, 133, 132, 119, 118, 7,
+        145, 116, 115, 114, 113, 111, 110, 109, 108, 142,
+        107, 106, 105, 104, 103, 102, 101, 100, 99, 98,
+        131, 130, 129 ]
+    let stationId = peekStationId(stationIds);
+    stationIds.pop(stationId);
+    let nextStationId = peekStationId(stationIds);
+
     // 경로 검색 조회
-    var source = Math.floor((Math.random() * (308)) + 1);
-    var target = Math.floor((Math.random() * (616-310)) + 309);
-    findPath(source, target);
+    findPath(stationId, nextStationId);
 
     // 즐겨찾기 목록 조회
     findFavorites(accessToken);
@@ -76,6 +84,10 @@ function findStations() {
     check(loginRes, {
         'retrieved stations': (resp) => resp.status === 200,
     });
+}
+
+function peekStationId(stationIds) {
+    return stationIds[ Math.floor(Math.random() * stationIds.length) ];
 }
 
 function findPath(source, target) {
